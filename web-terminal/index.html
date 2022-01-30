@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Terminal</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #444;
+            color: #fff;
+            font-family: sans-serif;
+            font-size: 20px;
+
+            transition: 0.5136s;
+        }
+
+        .tg {
+            color: green;
+        }
+
+        .tgi {
+            color: green;
+            display: inline;
+        }
+
+        #input {
+            border: none;
+            background: none;
+            color: #fff;
+            width: 80vw;
+            font-size: 20px;
+            outline: none;
+        }
+
+        .tw {
+            display: inline;
+            color: #fff;
+        }
+
+        input[type="submit"] {
+            border: none;
+            border-radius: 50px;
+            height: 25px;
+            width: 100px;
+        }
+
+        .tred {
+            color: rgb(255, 117, 117);
+        }
+
+        .tredinline {
+            display: inline;
+            color: rgb(255, 117, 117);
+        }
+
+        a {
+            text-decoration: none;
+            color: rgb(97, 205, 255);
+        }
+
+        a:hover {
+            color: rgb(56, 127, 160);
+        }
+
+        .inline {
+            display: inline;
+        }
+
+        form {
+            display: inline;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="loading" style="display:none;color:black;">
+        <center>
+            <h1>Loading...</h1>
+
+            <p>Please wait</p>
+        </center>
+    </div>
+
+    <div id="terminal">
+        <p>This website created using Plain HTML & CSS & JS<br>
+            Createdby : HansenKhi<br>
+            Github Link : <a href="https://github.com/HansenKhi">HansenKhi</a></p>
+        <div class="tg" id="tx">root@localhost : <form onsubmit="onclick_()"><input autofocus autocomplete="off"
+                    type="text" id="input"></form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("terminal").style.display = "none"
+        document.body.style.backgroundColor = "white"
+
+        window.addEventListener("load", (ev) => {
+            document.getElementById("loading").style.display = "block"
+
+            setTimeout(() => {
+                document.getElementById("terminal").style.display = "block"
+                document.getElementById("loading").style.display = "none"
+                document.body.style.backgroundColor = "#444"
+            }, 1000 * 2)
+        })
+
+        function onclick_() {
+            let d = document.getElementById("tx")
+            let inpVal = document.getElementById("input").value || "none"
+
+            d.innerHTML = "root@localhost : <div class='tw'>" + inpVal + "</div>"
+            if (inpVal === "help") {
+                let inputCMD = document.createElement("div")
+                inputCMD.innerHTML = `
+<center>
+    <h4>Showing all command</h4>
+    <p class="inline">server shutdown | <div class="tredinline">DANGER!</div> This command will shutdown the local server</p>
+</center>`
+                document.getElementById("terminal").appendChild(inputCMD)
+            } else if (inpVal === "server shutdown") {
+                document.body.innerHTML = "<center><h1>The server is shutdowned</h1><h6>If you want use back reload this page!</h6></center>"
+            } else {
+                let inputCMD = document.createElement("div")
+                inputCMD.innerHTML = "<div class='tred'><br>-----------------------------------------------------------<br>Invalid Command!<br>Command : " + inpVal + "<br>Please use command \"help\" to show all command<br>-----------------------------------------------------------<br><br></div>"
+                document.getElementById("terminal").appendChild(inputCMD)
+            }
+            d.id = "end"
+
+            let newDoc = document.createElement("div")
+
+            newDoc.classList.add("tg")
+            newDoc.id = "tx"
+            newDoc.innerHTML = 'root@localhost : <form onsubmit="onclick_()"><input autocomplete="off" autofocus style="display: inline" type="text" id="input"></form>'
+            document.getElementById("terminal").appendChild(newDoc)
+        }
+    </script>
+</body>
+
+</html>
